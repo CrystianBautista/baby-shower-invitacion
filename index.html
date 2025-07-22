@@ -84,7 +84,7 @@
     }
 
     img {
-      width: 100%;
+      width: 190%;
       max-width: 250px;
       border-radius: 10px;
       margin: 10px auto;
@@ -93,6 +93,17 @@
 
     img:hover {
       transform: scale(1.05);
+    }
+
+    .qr-code {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 12px; /* opcional, por estética */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* sombra para que se vea elevado */
+    background-color: white; /* mejora el escaneo si el fondo es rosa */
+    padding: 10px; /* separa del fondo */
     }
 
     .btn-confirmar {
@@ -233,11 +244,16 @@
 
   <div class="countdown" id="countdown">Faltan: ...</div>
 
-  <img src="booties.jpg" alt="Animal tierno" />
+  <img src="booties.jpg" alt="booties" />
 
   <p class="info-item"><strong>🗓 Fecha:</strong> 16 de agosto de 2025</p>
   <p class="info-item"><strong>⏰ Hora:</strong> 1:30 PM</p>
-  <p class="info-item"><strong>📍 Lugar:</strong> Salón "Dulces Momentos", CDMX</p>
+  <p class="info-item"><strong>📍 Lugar:</strong> ICON Event Room</p>
+ 
+  <a href="https://maps.app.goo.gl/ujje36jD3Cin3tRD7" target="_blank">
+  <img src="qr.jpg" alt="QR Ubicación Baby Shower" class="qr-code" />
+  </a>
+
 
   <p class="info-item"><strong> Con mucho amor esperamos compartir este momento tan especial contigo.</strong> </p>
     <p class="info-item"><strong>¡No faltes!</strong> </p>
