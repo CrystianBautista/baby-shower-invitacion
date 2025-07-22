@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title> 👶 Invitación Baby Shower 🍼</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glow {
+    0% {
+    text-shadow: 0 0 5px #fff, 0 0 10px #ff99cc, 0 0 15px #ff99cc;
+    }
+    50% {
+    text-shadow: 0 0 10px #fff, 0 0 20px #ff66b2, 0 0 25px #ff66b2;
+    }
+    100% {
+    text-shadow: 0 0 5px #fff, 0 0 10px #ff99cc, 0 0 15px #ff99cc;
+    }
+    }
+
+    h1 {
+    color: #ff4da6;
+    animation: glow 2s ease-in-out infinite;
+    font-family: 'Great Vibes', cursive;
+    }
+  </style>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(180deg, #ffe6f0, #fff0f5);
+      animation: pulseBg 10s infinite alternate;
+      overflow-x: hidden;
+    }
+
+    .title, .photo, .countdown, .info {
+    animation: fadeInUp 1s ease-out both;
+    }
+
+    .timer-circle {
+    background-color: white;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px #ffcce0;
+    }
+
+    canvas#stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 2rem;
+      background: rgba(255, 240, 246, 0.95);
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    p {
+      color: #444;
+      font-size: 1.1rem;
+      margin: 8px 0;
+    }
+
+    img {
+      width: 100%;
+      max-width: 250px;
+      border-radius: 10px;
+      margin: 10px auto;
+      transition: transform 0.3s ease;
+    }
+
+    img:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-confirmar {
+      background-color: #e91e63;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    .btn-confirmar:hover {
+      background-color: #d81b60;
+    }
+
+    .countdown {
+      font-size: 1.5rem;
+      color: #880e4f;
+      margin: 20px 0;
+    }
+
+    .gallery {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      padding: 10px 0;
+      margin: 20px 0;
+    }
+
+    .gallery img {
+      flex: 0 0 auto;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    .decoraciones {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 80px;
+      z-index: 1;
+      pointer-events: none;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.4; /* aumentamos la opacidad para que se vean más */
+    }
+
+    .decoraciones.izquierda {
+      left: 10px;
+      animation-delay: 0s;
+    }
+
+    .decoraciones.derecha {
+      right: 10px;
+      animation-delay: 3s;
+    }
+
+    .decoraciones img {
+      width: 100%;
+      margin: 20px 0;
+    }
+
+    .rsvp {
+    background: #ff69b4;
+    padding: 15px 30px;
+    border-radius: 40px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    transition: transform 0.2s;
+    }
+
+    .rsvp:hover {
+    transform: scale(1.05);
+    }
+
+    .info-item{
+      margin: 15px 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(15px); }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .countdown {
+        font-size: 1.2rem;
+      }
+      .decoraciones {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<!-- Decoraciones laterales -->
+<div class="decoraciones izquierda">
+  <img src="globos.jpg" alt="Flor 1">
+  <img src="globos.jpg" alt="Flor 2">
+  <img src="globos.jpg" alt="Flor 3">
+  <img src="globos.jpg" alt="Flor 4">
+  <img src="globos.jpg" alt="Flor 5">
+</div>
+<div class="decoraciones derecha">
+  <img src="globos.jpg" alt="Flor 1">
+  <img src="globos.jpg" alt="Flor 2">
+  <img src="globos.jpg" alt="Flor 3">
+  <img src="globos.jpg" alt="Flor 4">
+  <img src="globos.jpg" alt="Flor 5">
+</div>
+
+<div class="container">
+  <h1>¡Estás invitado al Baby Shower de Eliette!</h1>
+
+  <div class="countdown" id="countdown">Faltan: ...</div>
+
+  <img src="booties.jpg" alt="Animal tierno" />
+
+  <p class="info-item"><strong>🗓 Fecha:</strong> 16 de agosto de 2025</p>
+  <p class="info-item"><strong>⏰ Hora:</strong> 1:30 PM</p>
+  <p class="info-item"><strong>📍 Lugar:</strong> Salón "Dulces Momentos", CDMX</p>
+
+  <p class="info-item"><strong> Con mucho amor esperamos compartir este momento tan especial contigo.</strong> </p>
+    <p class="info-item"><strong>¡No faltes!</strong> </p>
+
+  <a class="rsvp"
+     href="https://forms.gle/SXQ19AFqvkeXxCHx8"
+     target="_blank">
+   🎀 Por favor Confirma tu asistencia 🎀
+  </a>
+
+  <!--
+  <h2 style="color: #e91e63; margin-top: 40px;">🎀 Momentos tiernos 🎀</h2>
+  <div class="gallery">
+    <img src="https://cdn.pixabay.com/photo/2017/03/29/12/17/bunny-2181162_1280.jpg" alt="Conejito" />
+    <img src="https://cdn.pixabay.com/photo/2022/02/02/17/20/elephant-6990126_1280.png" alt="Elefantito" />
+    <img src="https://cdn.pixabay.com/photo/2020/03/04/18/53/baby-shower-4900727_1280.jpg" alt="Decoración" />
+    <img src="https://cdn.pixabay.com/photo/2021/06/24/10/23/flowers-6361067_1280.jpg" alt="Flores blancas" />
+    <img src="https://cdn.pixabay.com/photo/2019/06/13/09/02/rabbit-4270227_1280.jpg" alt="Conejo en flor" />
+  </div>
+  -->
+</div>
+
+<!-- Música alegre -->
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-smile.mp3" type="audio/mpeg">
+  Tu navegador no soporta audio.
+</audio>
+
+<!-- Estrellas animadas -->
+<script>
+  const canvas = document.getElementById("stars");
+  const ctx = canvas.getContext("2d");
+
+  let stars = [];
+  const numStars = 100;
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
+  for (let i = 0; i < numStars; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 1.5 + 0.5,
+      speed: Math.random() * 0.5 + 0.2,
+    });
+  }
+
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+    stars.forEach(star => {
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      ctx.fill();
+      star.y += star.speed;
+      if (star.y > canvas.height) {
+        star.y = 0;
+        star.x = Math.random() * canvas.width;
+      }
+    });
+    requestAnimationFrame(drawStars);
+  }
+
+  drawStars();
+</script>
+
+<!-- Cuenta regresiva -->
+<script>
+  const countdownEl = document.getElementById("countdown");
+  const eventDate = new Date("2025-08-16T13:30:00");
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = eventDate - now;
+
+    if (diff <= 0) {
+      countdownEl.innerText = "¡Ya comenzó el Baby Shower! 🎉";
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    countdownEl.innerText = `Faltan: ${days} días, ${hours}h ${minutes}m ${seconds}s`;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
